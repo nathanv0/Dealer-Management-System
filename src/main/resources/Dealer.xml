@@ -1,0 +1,103 @@
+<Dealers>
+	<Dealer id="485">
+		<Name>Wacky Bob’s Automall</Name> 
+		<Vehicle type="suv" id="848432">
+			<Price unit="pounds">17000</Price>
+			<Make>Land Rover</Make>
+			<Model>Range Rover</Model>
+		</Vehicle>
+		<Vehicle type="pickup" id="52523">
+			<Price unit="dollars">22600</Price>
+			<Make>Toyota</Make>
+			<Model>Tundra</Model>
+		</Vehicle>
+		<Vehicle type="sedan" id="151e5dde">
+			<Price unit="dollars">36600</Price>
+			<Make>Genesis</Make>
+			<Model>G70</Model>
+		</Vehicle>
+		<Vehicle type="sports car" id="ern222">
+			<Price unit="dollars">22330</Price>
+			<Make>Mazda</Make>
+			<Model>Miata</Model>
+		</Vehicle>
+	</Dealer>
+
+	<Dealer id="362">
+		<Name>Nathan’s Automall</Name>
+		<Vehicle type="suv" id="848432">
+			<Price unit="pounds">17000</Price>
+			<Make>Land Rover</Make>
+			<Model>Range Rover</Model>
+		</Vehicle>
+		<Vehicle type="pickup" id="52523">
+			<Price unit="dollars">22600</Price>
+			<Make>Toyota</Make>
+			<Model>Tundra</Model>
+		</Vehicle>
+		<Vehicle type="sedan" id="151e5dde">
+			<Price unit="dollars">36600</Price>
+			<Make>Genesis</Make>
+			<Model>G70</Model>
+		</Vehicle>
+		<Vehicle type="sports car" id="ern222">
+			<Price unit="dollars">22330</Price>
+			<Make>Mazda</Make>
+			<Model>Miata</Model>
+		</Vehicle>
+	</Dealer>
+
+	<Dealer id="902">
+		<Name>Prime Auto Hub</Name>
+		<Vehicle type="suv" id="948392">
+			<Price unit="dollars">25000</Price>
+			<Make>Ford</Make>
+			<Model>Explorer</Model>
+		</Vehicle>
+		<Vehicle type="pickup" id="67389">
+			<Price unit="dollars">31000</Price>
+			<Make>Chevrolet</Make>
+			<Model>Silverado</Model>
+		</Vehicle>
+		<Vehicle type="sedan" id="1ac5f88">
+			<Price unit="dollars">27000</Price>
+			<Make>Honda</Make>
+			<Model>Accord</Model>
+		</Vehicle>
+		<Vehicle type="sports car" id="sp1092">
+			<Price unit="dollars">62000</Price>
+			<Make>Chevrolet</Make>
+			<Model>Corvette</Model>
+		</Vehicle>
+
+		<Vehicle type="suv" id="848432">
+			<Price unit="pounds">17000</Price>
+			<Make>Land Rover</Make>
+			<Model>Range Rover</Model>
+		</Vehicle>
+	</Dealer>
+
+	<Dealer id="784">
+		<Name>Elite Wheels</Name>
+		<Vehicle type="suv" id="501327">
+			<Price unit="dollars">35000</Price>
+			<Make>Jeep</Make>
+			<Model>Grand Cherokee</Model>
+		</Vehicle>
+		<Vehicle type="pickup" id="22983">
+			<Price unit="dollars">44000</Price>
+			<Make>RAM</Make>
+			<Model>1500</Model>
+		</Vehicle>
+		<Vehicle type="sedan" id="7483af">
+			<Price unit="dollars">19500</Price>
+			<Make>Toyota</Make>
+			<Model>Camry</Model>
+		</Vehicle>
+		<Vehicle type="sports car" id="ferr55">
+			<Price unit="dollars">85000</Price>
+			<Make>Ferrari</Make>
+			<Model>Portofino</Model>
+		</Vehicle>
+	</Dealer>
+</Dealers>
