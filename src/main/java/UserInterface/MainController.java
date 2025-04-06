@@ -30,9 +30,6 @@ public class MainController implements Initializable {
     @FXML private TableColumn<Vehicle, String> priceCol;
     @FXML private TableColumn<Vehicle, String> statusCol;
 
-    @FXML private Button addVehicleButton;
-    @FXML private Button deleteVehicleButton;
-
     private List<Dealer> dealers;
     private Dealer currentDealer;
     private final ReadXMLFile readXMLFile = new ReadXMLFile();
@@ -77,13 +74,7 @@ public class MainController implements Initializable {
 //
 //            }
 //        });
-//
-//        Vehicle vehicle1 = new Vehicle("sedan", "123", "20000", "Toyota", "Camry");
-//        Vehicle vehicle2 = new Vehicle("sdf", "sdf", "sdf", "sadfsdfd", "Camsdfsdary");
-//        List<Vehicle> list = new ArrayList<>();
-//        list.add(vehicle1);
-//        list.add(vehicle2);
-//        //vehicleTable.getItems().addAll(list);
+
 
     }
 
