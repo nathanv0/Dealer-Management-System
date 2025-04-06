@@ -35,7 +35,7 @@ public class MainController implements Initializable {
 
     private List<Dealer> dealers;
     private Dealer currentDealer;
-    private ReadXMLFile readXMLFile = new ReadXMLFile();
+    private final ReadXMLFile readXMLFile = new ReadXMLFile();
     String filePath = "";
 
     @Override
@@ -50,7 +50,7 @@ public class MainController implements Initializable {
         // Choice box switch dealer: Adding all dealer name to the choiceList
         dealerChoiceBox.getItems().addAll(namesList);
         // Set default value
-        dealerChoiceBox.setConverter(new StringConverter<String>() {
+        dealerChoiceBox.setConverter(new StringConverter<>() {
             @Override
             public String toString(String s) {
                 return (s == null) ? "Select Dealer" : s;
