@@ -1,5 +1,7 @@
 package UserInterface;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,22 +32,27 @@ public class MainController implements Initializable {
     @FXML private TableColumn<Vehicle, String> priceCol;
     @FXML private TableColumn<Vehicle, String> statusCol;
 
-    private List<Dealer> dealers;
+    List<Dealer> dealers;
     private Dealer currentDealer;
-    private final ReadXMLFile readXMLFile = new ReadXMLFile();
     String filePath = "";
 
+    ObservableList<Vehicle> dealersOL = null;
+
+    // Auto called when the view is created
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        dealers = readXMLFile.getDealers();
+        dealers = ReadXMLFile.getDealers();
+
         List<String> namesList = new ArrayList<>();
         for (Dealer dealer : dealers) {
             namesList.add(dealer.getName());
 
         }
+        ObservableList<String> dealerNameOL = FXCollections.observableArrayList(namesList);
         // Choice box switch dealer: Adding all dealer name to the choiceList
-        dealerChoiceBox.getItems().addAll(namesList);
+        dealerChoiceBox.setItems(dealerNameOL);
+
         // Set default value
         dealerChoiceBox.setConverter(new StringConverter<>() {
             @Override
@@ -75,7 +82,6 @@ public class MainController implements Initializable {
 //            }
 //        });
 
-
     }
 
     // Handle when user select open file
@@ -99,7 +105,8 @@ public class MainController implements Initializable {
         new MenuBarController().exit(scenePane);
     }
 
-    public void handleSelectDealer(ActionEvent event) {
+    // Handle when user select vehicle from the Choice Box
+    void handleSelectDealer(ActionEvent event) {
         // Get the value from the user choice
         String dealerName = dealerChoiceBox.getValue(); // get dealer name
         myLabel.setText(dealerName); // Change the label based on selected dealer
@@ -108,11 +115,28 @@ public class MainController implements Initializable {
         for (int i = 0; i < dealers.size(); i++) {
             if (!dealers.isEmpty()) {
                 currentDealer = dealers.get(i);
+                dealersOL = FXCollections.observableArrayList(currentDealer.getVehicles());
                 // If their name matches -> add the data to the table
                 if (currentDealer.getName().equals(dealerName)) {
-                    vehicleTable.getItems().setAll(currentDealer.getVehicles());
+                    vehicleTable.setItems(dealersOL);
+                    return; // Stop the loop when the dealer is found -> prevent create a new instance of ObservablesList
                 }
             }
+        }
+    }
+
+    // Handle when user delete vehicle
+    @FXML
+    void handleDeleteVehicle(ActionEvent event) {
+        Vehicle selectedVehicle = (Vehicle) vehicleTable.getSelectionModel().getSelectedItem();
+        if (selectedVehicle != null) {
+            currentDealer.getVehicles().remove(selectedVehicle);
+            dealersOL.remove(selectedVehicle);
+            // Clear the selection
+            vehicleTable.getSelectionModel().clearSelection();
+            System.out.printf("Deleted: %s\n", selectedVehicle);
+        } else {
+            System.out.println("No vehicle selected to delete.");
         }
     }
 }
