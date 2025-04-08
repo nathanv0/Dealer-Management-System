@@ -71,7 +71,7 @@ public class MainController implements Initializable {
         // Build the table
         VehicleTable.buildTable(vehicleTable, idCol, typeCol, makeCol, modelCol, priceCol, statusCol);
 
-//        // Handle adding vehicle
+        // Handle adding vehicle
 //        addVehicleButton.setOnAction(new EventHandler<ActionEvent>() {
 //            @Override
 //            public void handle(ActionEvent actionEvent) {
