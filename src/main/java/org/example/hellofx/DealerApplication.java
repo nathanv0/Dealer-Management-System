@@ -6,12 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class DealerApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         try {
@@ -21,9 +22,12 @@ public class HelloApplication extends Application {
             // Create a Scene by passing the root
             Scene scene = new Scene(root);
 
-            stage.setTitle("Dealership Management System");
+            stage.setTitle("Dealership Management System"); // Set the title of the stage
+            // Set the icon of the stage
+            stage.getIcons().add(new Image("icon.jpg"));
+            // Add the scene to the stage
             stage.setScene(scene);
-            stage.show();
+            stage.show(); // show the stage
 
 //            stage.setOnCloseRequest(windowEvent -> {
 //                windowEvent.consume();

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadXMLFile {
-    public static final String FILENAME = "C:\\Users\\nhanb\\Desktop\\Metro\\HelloFX\\src\\main\\resources\\Dealer.xml";
+    public static final String FILENAME = "src/main/resources/Dealer.xml";
     public static List<Dealer> getDealers() {
         // List to store dealers
         List<Dealer> dealers = new ArrayList<>();

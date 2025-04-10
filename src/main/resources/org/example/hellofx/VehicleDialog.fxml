@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ButtonType?>
 <?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
@@ -9,7 +10,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane prefHeight="245.0" prefWidth="374.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<DialogPane fx:id="dialogPane" expanded="true" prefHeight="273.0" prefWidth="462.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
    <buttonTypes>
       <ButtonType fx:constant="OK" />
       <ButtonType fx:constant="CANCEL" />
@@ -40,10 +44,10 @@
                <font>
                   <Font size="18.0" />
                </font></Label>
-            <TextField GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="idField" GridPane.columnIndex="1" />
+            <TextField fx:id="typeField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="makeField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="modelField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label prefHeight="30.0" prefWidth="16.0" text="Id" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                <font>
                   <Font size="18.0" />
@@ -54,8 +58,11 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="priceField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
       </GridPane>
    </content>
 </DialogPane>

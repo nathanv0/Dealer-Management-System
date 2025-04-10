@@ -1,4 +1,4 @@
-package UserInterface;
+package Controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,7 +34,6 @@ public class MainController implements Initializable {
 
     List<Dealer> dealers;
     private Dealer currentDealer;
-    String filePath = "";
 
     ObservableList<Vehicle> dealersOL = null;
 
@@ -70,17 +69,6 @@ public class MainController implements Initializable {
 
         // Build the table
         VehicleTable.buildTable(vehicleTable, idCol, typeCol, makeCol, modelCol, priceCol, statusCol);
-
-        // Handle adding vehicle
-//        addVehicleButton.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent actionEvent) {
-//                Dialog addVehicleDialog = new AddVehicleDialog();
-//                addVehicleDialog.setTitle("Add Vehicle");
-//                Optional<Vehicle> result = addVehicleDialog.showAndWait();
-//
-//            }
-//        });
 
     }
 

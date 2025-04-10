@@ -7,6 +7,6 @@ module org.example.hellofx {
 
     opens org.example.hellofx to javafx.fxml;
     exports org.example.hellofx;
-    exports UserInterface;
-    opens UserInterface to javafx.fxml;
+    exports Controller;
+    opens Controller to javafx.fxml;
 }

@@ -1,4 +1,4 @@
-package UserInterface;
+package Controller;
 
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
