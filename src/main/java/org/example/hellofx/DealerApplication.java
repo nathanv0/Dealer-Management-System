@@ -29,10 +29,10 @@ public class DealerApplication extends Application {
             stage.setScene(scene);
             stage.show(); // show the stage
 
-//            stage.setOnCloseRequest(windowEvent -> {
-//                windowEvent.consume();
-//                exitProgram(stage);
-//            });
+            stage.setOnCloseRequest(windowEvent -> {
+                windowEvent.consume();
+                exitProgram(stage);
+            });
         } catch(Exception e) {
             e.printStackTrace();
             System.out.println("Can't open the file");

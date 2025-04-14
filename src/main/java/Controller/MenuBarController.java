@@ -18,7 +18,7 @@ public class MenuBarController {
     FileChooser.ExtensionFilter allFile = new FileChooser.ExtensionFilter("All Files", "*.*");
 
     // Method for open file
-    public void openFile(Label outputLabel) {
+    public String openFile(Label outputLabel) {
         FileChooser fileChooser = new FileChooser();
 
         fileChooser.getExtensionFilters().addAll(xmlExtension, jsonExtension, allFile);
@@ -31,9 +31,11 @@ public class MenuBarController {
             System.out.println("File selected");
             System.out.println(selectedFile.getPath());
             outputLabel.setText("You selected " + selectedFile.getName());
+            return selectedFile.getPath();
         } else {
             System.out.println("File selection cancelled");
         }
+        return "src/main/resources/Dealer.xml"; // Return default dealer.xml to prevent error
     }
 
     // Method for saving the file

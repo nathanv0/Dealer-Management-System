@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="scenePane" prefHeight="578.0" prefWidth="885.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
+<AnchorPane fx:id="scenePane" prefHeight="578.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
    <children>
       <MenuBar layoutX="-1.0" layoutY="2.0" prefHeight="25.0" prefWidth="890.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0">
         <menus>
@@ -72,31 +72,36 @@
       </TableView>
       <ToolBar layoutY="27.0" prefHeight="41.0" prefWidth="890.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <items>
-            <Button mnemonicParsing="false" text="➕ Add Vehicle">
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleAddVehicle" text="➕ Add Vehicle">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#handleDeleteVehicle" text="➖ Delete Vehicle">
+            <Button fx:id="updateButton" mnemonicParsing="false" onAction="#handleUpdateVehicle" text="Update">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-          <Button mnemonicParsing="false" text="Transfer Vehicle">
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#handleDeleteVehicle" text="➖ Delete Vehicle">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+          <Button fx:id="transferButton" mnemonicParsing="false" onAction="#handleTransferVehicle" text="Transfer Vehicle">
                <font>
                   <Font size="15.0" />
                </font></Button>
-            <Button mnemonicParsing="false" text="Rent Vehicle">
+            <Button fx:id="rentButton" mnemonicParsing="false" onAction="#handleRentVehicle" text="Rent Vehicle">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" text="Return Vehicle">
+            <Button fx:id="returnButton" mnemonicParsing="false" onAction="#handleReturnVehicle" text="Return Vehicle">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" text="Add Dealer">
+            <Button mnemonicParsing="false" onAction="#handleAddDealer" text="Add Dealer">
                <font>
                   <Font size="15.0" />
                </font>
