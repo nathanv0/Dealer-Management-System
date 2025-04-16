@@ -10,9 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.StringConverter;
-import org.example.hellofx.Dealer;
-import org.example.hellofx.ReadXMLFile;
-import org.example.hellofx.Vehicle;
+import org.example.hellofx.*;
 
 
 import java.net.URL;
@@ -86,8 +84,8 @@ public class MainController implements Initializable {
     void handleOpenFile(ActionEvent event) {
         System.out.println("Opening the file");
         String filePath = new MenuBarController().openFile(outputLabel);
-        // Get the dealers from xml file
-        dealers = ReadXMLFile.getDealers(filePath);
+        // Instantiate new dealers and get the dealers from given file
+        dealers = DealerSingleton.getDealers(filePath);
 
         // Create a list to store all the dealers name
         List<String> namesList = new ArrayList<>();
@@ -105,7 +103,7 @@ public class MainController implements Initializable {
     @FXML
     void handleSaveFile(ActionEvent event) {
         System.out.println("Saving the file");
-        new MenuBarController().saveFile(outputLabel);
+        new MenuBarController().saveFile(outputLabel, dealers);
     }
 
     // When user select close option from menu

@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadXMLFile {
-    public static List<Dealer> getDealers(String fileName) {
+public class ReadXMLFile implements FileHandler{
+    public List<Dealer> getDealers(String fileName) {
         // List to store dealers
         List<Dealer> dealers = new ArrayList<>();
 

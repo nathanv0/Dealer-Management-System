@@ -6,8 +6,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.example.hellofx.Dealer;
+import org.example.hellofx.JSONFileHandler;
 
 import java.io.File;
+import java.util.List;
 
 public class MenuBarController {
     Stage stage;
@@ -39,10 +42,10 @@ public class MenuBarController {
     }
 
     // Method for saving the file
-    public void saveFile(Label outputLabel) {
+    public void saveFile(Label outputLabel, List<Dealer> dealers) {
         FileChooser fileChooser = new FileChooser();
 
-        fileChooser.getExtensionFilters().addAll(xmlExtension, jsonExtension, allFile);
+        fileChooser.getExtensionFilters().addAll(jsonExtension, allFile, xmlExtension);
         fileChooser.setTitle("Save as"); // Set the title of open dialog
         fileChooser.setInitialDirectory(new File("./src/main/resources")); // Set the initial path
         File selectedFile = fileChooser.showSaveDialog(stage);
@@ -51,6 +54,7 @@ public class MenuBarController {
             System.out.println("File selected");
             System.out.println(selectedFile.getPath());
             outputLabel.setText("You have saved " + selectedFile.getName() + " successfully");
+            JSONFileHandler.saveAsJson(dealers, selectedFile.getPath());
         } else {
             System.out.println("File selection cancelled");
         }
@@ -62,7 +66,7 @@ public class MenuBarController {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Exit???");
         alert.setHeaderText("You're about to exit the app!");
-        alert.setContentText("Do you want to save before existing?");
+        alert.setContentText("Make sure you save before existing?");
 
         if (alert.showAndWait().get() == ButtonType.OK) {
             stage = (Stage) scenePane.getScene().getWindow();

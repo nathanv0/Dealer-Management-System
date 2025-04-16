@@ -45,7 +45,7 @@ public class DealerApplication extends Application {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Exit???");
         alert.setHeaderText("You're about to exit the app!");
-        alert.setContentText("Do you want to save before existing?");
+        alert.setContentText("Make sure you save before existing?");
 
         if (alert.showAndWait().get() == ButtonType.OK) {
             System.out.println("You're successfully logout");
