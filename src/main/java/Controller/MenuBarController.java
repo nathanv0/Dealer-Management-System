@@ -4,22 +4,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.example.hellofx.Dealer;
-import org.example.hellofx.DealerSingleton;
 import org.example.hellofx.JSONFileHandler;
-import org.example.hellofx.PreferencesManager;
 
 import java.io.File;
 import java.util.List;
 
 public class MenuBarController {
-    @FXML
-    private CheckMenuItem autoSave;
-
     Stage stage;
 
     // Extension filter: filter .xml or .json file
@@ -70,7 +64,7 @@ public class MenuBarController {
 
 
     // Method for exit file
-    public void exit(AnchorPane scenePane, List<Dealer> dealers) {
+    public void exit(AnchorPane scenePane) {
         // Create an alert window to ask for confirmation
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Exit???");

@@ -22,8 +22,6 @@ public class MainController implements Initializable {
     // Pane
     @FXML private AnchorPane scenePane;
     @FXML private MenuItem updateDealerBtn;
-    @FXML private MenuItem deleteDealerBtn;
-
     // Menu bar
     @FXML private Label myLabel;
     @FXML private ChoiceBox<String> dealerChoiceBox;
@@ -100,7 +98,7 @@ public class MainController implements Initializable {
             dealerChoiceBox.setItems(dealerNameOL);
 
             // Select the first dealer by default
-            dealerChoiceBox.setValue(namesList.get(0));
+            dealerChoiceBox.setValue(namesList.getFirst());
         }
     }
 
@@ -146,7 +144,7 @@ public class MainController implements Initializable {
     @FXML
     void handleCloseApp(ActionEvent event) {
         System.out.println("Closing the file");
-        new MenuBarController().exit(scenePane, dealers);
+        new MenuBarController().exit(scenePane);
     }
 
     // Handle when user select vehicle from the Choice Box
