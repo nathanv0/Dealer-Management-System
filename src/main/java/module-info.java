@@ -4,6 +4,7 @@ module org.example.hellofx {
     requires java.desktop;
     requires java.sql;
     requires org.json;
+    requires java.prefs;
 
 
     opens org.example.hellofx to javafx.fxml;

@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.input.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="scenePane" prefHeight="578.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
+<AnchorPane fx:id="scenePane" prefHeight="578.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
    <children>
       <MenuBar layoutX="-1.0" layoutY="2.0" prefHeight="25.0" prefWidth="890.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0">
         <menus>
@@ -22,7 +32,7 @@
                         <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <CheckMenuItem mnemonicParsing="false" selected="true" text="Auto Save" />
+                  <CheckMenuItem fx:id="autoSave" mnemonicParsing="false" selected="true" text="Auto Save" />
                   <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem mnemonicParsing="false" onAction="#handleCloseApp" text="Close" />
             </items>
@@ -39,12 +49,6 @@
           </Menu>
         </menus>
       </MenuBar>
-
-             <Label fx:id="outputLabel" layoutX="14.0" layoutY="89.0" text="Please import file to process">
-           <font>
-               <Font size="14.0" />
-           </font>
-       </Label>
       <Label fx:id="myLabel" alignment="CENTER" layoutX="306.0" layoutY="74.0" prefHeight="70.0" prefWidth="278.0" text="Select Dealer">
          <font>
             <Font size="23.0" />

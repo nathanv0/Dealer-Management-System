@@ -21,7 +21,7 @@ enum DialogMode {ADD, UPDATE}
 public class MainController implements Initializable {
     // Pane
     @FXML private AnchorPane scenePane;
-    @FXML private Label outputLabel;
+
     // Menu bar
     @FXML private Label myLabel;
     @FXML private ChoiceBox<String> dealerChoiceBox;
@@ -79,12 +79,39 @@ public class MainController implements Initializable {
                 vehicleTable.getSelectionModel().selectedItemProperty()) );
     }
 
+    // Load the last opened file when application start
+    public void loadLastFile(String filePath) {
+        dealers = DealerSingleton.getDealers(filePath);
+
+        // Update the UI with the loaded dealers
+        if (dealers != null && !dealers.isEmpty()) {
+            // Create a list of dealer names
+            List<String> namesList = new ArrayList<>();
+            for (Dealer dealer : dealers) {
+                namesList.add(dealer.getName());
+            }
+
+            // Update the choice box
+            ObservableList<String> dealerNameOL = FXCollections.observableArrayList(namesList);
+            dealerChoiceBox.setItems(dealerNameOL);
+
+            // Select the first dealer by default
+            dealerChoiceBox.setValue(namesList.get(0));
+        }
+    }
+
+
     // Handle when user select open file
     @FXML
     void handleOpenFile(ActionEvent event) {
         System.out.println("Opening the file");
-        String filePath = new MenuBarController().openFile(outputLabel);
+        String filePath = new MenuBarController().openFile();
+
+        // Save the file path as the last opened file
+        PreferencesManager.saveLastOpenedFile(filePath);
+
         // Instantiate new dealers and get the dealers from given file
+        DealerSingleton.setDealers(null);
         dealers = DealerSingleton.getDealers(filePath);
 
         // Create a list to store all the dealers name
@@ -103,14 +130,19 @@ public class MainController implements Initializable {
     @FXML
     void handleSaveFile(ActionEvent event) {
         System.out.println("Saving the file");
-        new MenuBarController().saveFile(outputLabel, dealers);
+        String saveFilePath = new MenuBarController().saveFile(dealers);
+
+        // If the selected file successfully saved -> update the file preference
+        if (saveFilePath != null) {
+            PreferencesManager.saveLastOpenedFile(saveFilePath);
+        }
     }
 
     // When user select close option from menu
     @FXML
     void handleCloseApp(ActionEvent event) {
         System.out.println("Closing the file");
-        new MenuBarController().exit(scenePane);
+        new MenuBarController().exit(scenePane, dealers);
     }
 
     // Handle when user select vehicle from the Choice Box

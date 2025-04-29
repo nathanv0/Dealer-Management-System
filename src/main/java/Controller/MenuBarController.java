@@ -1,18 +1,24 @@
 package Controller;
 
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.example.hellofx.Dealer;
+import org.example.hellofx.DealerSingleton;
 import org.example.hellofx.JSONFileHandler;
 
 import java.io.File;
 import java.util.List;
 
 public class MenuBarController {
+    @FXML
+    private CheckMenuItem autoSave;
+
     Stage stage;
 
     // Extension filter: filter .xml or .json file
@@ -21,28 +27,28 @@ public class MenuBarController {
     FileChooser.ExtensionFilter allFile = new FileChooser.ExtensionFilter("All Files", "*.*");
 
     // Method for open file
-    public String openFile(Label outputLabel) {
+    public String openFile() {
         FileChooser fileChooser = new FileChooser();
 
         fileChooser.getExtensionFilters().addAll(xmlExtension, jsonExtension, allFile);
 
         fileChooser.setTitle("Import xml data"); // Set the title of open dialog
         fileChooser.setInitialDirectory(new File("./src/main/resources")); // Set the initial path
+
         File selectedFile = fileChooser.showOpenDialog(stage);
 
         if (selectedFile != null) {
             System.out.println("File selected");
             System.out.println(selectedFile.getPath());
-            outputLabel.setText("You selected " + selectedFile.getName());
             return selectedFile.getPath();
         } else {
             System.out.println("File selection cancelled");
         }
-        return "src/main/resources/Dealer.xml"; // Return default dealer.xml to prevent error
+        return "./src/main/resources/Dealer.xml"; // Return default dealer.xml to prevent error
     }
 
     // Method for saving the file
-    public void saveFile(Label outputLabel, List<Dealer> dealers) {
+    public String saveFile( List<Dealer> dealers) {
         FileChooser fileChooser = new FileChooser();
 
         fileChooser.getExtensionFilters().addAll(jsonExtension, allFile, xmlExtension);
@@ -53,15 +59,16 @@ public class MenuBarController {
         if (selectedFile != null) {
             System.out.println("File selected");
             System.out.println(selectedFile.getPath());
-            outputLabel.setText("You have saved " + selectedFile.getName() + " successfully");
             JSONFileHandler.saveAsJson(dealers, selectedFile.getPath());
+            return selectedFile.getPath(); // Return the saved path
         } else {
             System.out.println("File selection cancelled");
         }
+        return null; // Return null if no file selected
     }
 
     // Method for exit file
-    public void exit(AnchorPane scenePane) {
+    public void exit(AnchorPane scenePane, List<Dealer> dealers) {
         // Create an alert window to ask for confirmation
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Exit???");
