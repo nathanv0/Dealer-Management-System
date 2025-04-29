@@ -21,6 +21,8 @@ enum DialogMode {ADD, UPDATE}
 public class MainController implements Initializable {
     // Pane
     @FXML private AnchorPane scenePane;
+    @FXML private MenuItem updateDealerBtn;
+    @FXML private MenuItem deleteDealerBtn;
 
     // Menu bar
     @FXML private Label myLabel;
@@ -77,6 +79,8 @@ public class MainController implements Initializable {
 
         returnButton.disableProperty().bind( Bindings.isNull(
                 vehicleTable.getSelectionModel().selectedItemProperty()) );
+
+
     }
 
     // Load the last opened file when application start
@@ -333,13 +337,8 @@ public class MainController implements Initializable {
 
                     // Update the observable list and refresh the table
                     dealersOL.remove(selectedVehicle);
-
-                    // Update the table to show the target dealer's updated list
-                    ObservableList<Vehicle> targetDealerOL = FXCollections.observableArrayList(targetDealer.getVehicles());
-                    vehicleTable.setItems(targetDealerOL);
-
-                    // Refresh the vehicle table to reflect changes
-                    vehicleTable.refresh();
+                    // selector widget
+                    dealerChoiceBox.setValue(targetDealerName);
 
                     // Inform the user
                     System.out.println("Vehicle transferred to: " + targetDealer.getName());
@@ -353,8 +352,27 @@ public class MainController implements Initializable {
     // Handle add new dealer
     @FXML
     public void handleAddDealer(ActionEvent event) {
-        Dealer newDealer = new Dealer();
+        handleUpdateDealer(event);
+    }
 
+    @FXML
+    public void handleUpdateDealer(ActionEvent event) {
+        Dealer dealer = null;
+        String dialogTitle = "";
+        DialogMode mode;
+
+        // Set the mode, title to correspond button
+        if (event.getSource().equals(updateDealerBtn)) {
+            mode = DialogMode.UPDATE;
+            dialogTitle = "Update Dealer";
+            dealer = currentDealer;
+        }
+        // Add dealer button
+        else {
+            mode = DialogMode.ADD;
+            dialogTitle = "Add new Dealer";
+            dealer = new Dealer();
+        }
         try {
             // Load the fxml file and create a new popup dialog
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -364,44 +382,64 @@ public class MainController implements Initializable {
             // Get the vehicle controller
             DealerDialogController dealerDialogController = fxmlLoader.getController();
 
-            dealerDialogController.setDealer(newDealer);
+            dealerDialogController.setDealer(dealer);
 
             // Create a dialog button type
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setDialogPane(vehicleDialogPane);
-            dialog.setTitle("Add Dealer");
+            dialog.setTitle(dialogTitle);
 
             // Option button to handle event
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             // When user click OK
             if (clickedButton.get() == ButtonType.OK) {
                 System.out.println("User clicked OK");
-                // If the user enter all information and there is no dealer yet
-                if (newDealer != null && dealers != null) {
-                    // Add the new dealer to the list of dealers
+                if (mode == DialogMode.ADD) {
+                    // If the user enter all information and there is no dealer yet
+                    if (dealer != null && dealers != null) {
+                        // Add the new dealer to the list of dealers
 
-                    dealers.add(newDealer);
-                    System.out.println("New dealer added: " + newDealer);
+                        dealers.add(dealer);
+                        System.out.println("New dealer added: " + dealer);
 
-                    // Update the ChoiceBox
-                    List<String> dealerNames = new ArrayList<>();
-                    for (Dealer dealer : dealers) {
-                        dealerNames.add(dealer.getName());
                     }
-                    ObservableList<String> dealerNameOL = FXCollections.observableArrayList(dealerNames);
-                    dealerChoiceBox.setItems(dealerNameOL);
+                }
+                // Update the ChoiceBox
+                List<String> dealerNames = new ArrayList<>();
+                for (Dealer dl : dealers) {
+                    dealerNames.add(dl.getName());
+                }
+                ObservableList<String> dealerNameOL = FXCollections.observableArrayList(dealerNames);
+                dealerChoiceBox.setItems(dealerNameOL);
 
-                    // Select the newly added dealer in the ChoiceBox
-                    dealerChoiceBox.setValue(newDealer.getName());
-                }
-                else {
-                    System.out.println("Please import file first");
-                    showAlertMessage(Alert.AlertType.ERROR, "Error adding new dealer", "Please import new file before adding new dealer");
-                }
+                // Select the newly added dealer in the ChoiceBox
+                dealerChoiceBox.setValue(dealer.getName());
             }
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void handleDeleteDealer(ActionEvent event) {
+        if (currentDealer != null) {
+            showAlertMessage(Alert.AlertType.CONFIRMATION, "Deleting current dealer", "Are you sure you want to delete current dealer?");
+            dealersOL.remove(currentDealer);
+            dealers.remove(currentDealer);
+            currentDealer = dealers.get(0);
+            // Update the ChoiceBox
+            List<String> dealerNames = new ArrayList<>();
+            for (Dealer dl : dealers) {
+                dealerNames.add(dl.getName());
+            }
+            ObservableList<String> dealerNameOL = FXCollections.observableArrayList(dealerNames);
+            dealerChoiceBox.setItems(dealerNameOL);
+
+            // Select the newly added dealer in the ChoiceBox
+            dealerChoiceBox.setValue(currentDealer.getName());
+        } else {
+            System.out.println("No vehicle selected to delete.");
         }
     }
 

@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -18,7 +17,7 @@
 
 <AnchorPane fx:id="scenePane" prefHeight="578.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
    <children>
-      <MenuBar layoutX="-1.0" layoutY="2.0" prefHeight="25.0" prefWidth="890.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0">
+      <MenuBar fx:id="menuBarController" layoutX="-1.0" layoutY="2.0" prefHeight="25.0" prefWidth="890.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -32,14 +31,14 @@
                         <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <CheckMenuItem fx:id="autoSave" mnemonicParsing="false" selected="true" text="Auto Save" />
                   <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem mnemonicParsing="false" onAction="#handleCloseApp" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem fx:id="updateDealerBtn" mnemonicParsing="false" onAction="#handleUpdateDealer" text="Update Dealer" />
+                  <MenuItem fx:id="deleteDealerBtn" mnemonicParsing="false" onAction="#handleDeleteDealer" text="Delete Dealer" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

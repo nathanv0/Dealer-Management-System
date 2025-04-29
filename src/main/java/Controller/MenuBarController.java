@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import org.example.hellofx.Dealer;
 import org.example.hellofx.DealerSingleton;
 import org.example.hellofx.JSONFileHandler;
+import org.example.hellofx.PreferencesManager;
 
 import java.io.File;
 import java.util.List;
@@ -66,6 +67,7 @@ public class MenuBarController {
         }
         return null; // Return null if no file selected
     }
+
 
     // Method for exit file
     public void exit(AnchorPane scenePane, List<Dealer> dealers) {

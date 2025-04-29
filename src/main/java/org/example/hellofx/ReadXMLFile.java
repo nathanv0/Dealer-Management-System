@@ -79,12 +79,8 @@ public class ReadXMLFile implements FileHandler{
                         System.out.println("Vehicle: " + v.getMake() + " " + v.getModel() + " (" + v.getType() + ")");
                     }
                     System.out.println();
-
                 }
-
             }
-
-
         } catch (ParserConfigurationException | IOException | SAXException e) {
             e.printStackTrace();
         }
