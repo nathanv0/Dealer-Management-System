@@ -17,7 +17,7 @@
 
 <AnchorPane fx:id="scenePane" prefHeight="578.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
    <children>
-      <MenuBar fx:id="menuBarController" layoutX="-1.0" layoutY="2.0" prefHeight="25.0" prefWidth="890.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0">
+      <MenuBar layoutX="-1.0" layoutY="2.0" prefHeight="25.0" prefWidth="890.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -75,7 +75,7 @@
       </TableView>
       <ToolBar layoutY="27.0" prefHeight="41.0" prefWidth="890.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <items>
-            <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleAddVehicle" text="➕ Add Vehicle">
+            <Button mnemonicParsing="false" onAction="#handleAddVehicle" text="➕ Add Vehicle">
                <font>
                   <Font size="15.0" />
                </font>

@@ -91,7 +91,7 @@ public class MainController implements Initializable {
 
     // Load the last opened file when application start
     public void loadDealerFile(String filePath) {
-        dealers = DealerManager.loadDealers(filePath);
+        dealers = dealerManager.loadDealers(filePath);
         updateDealerChoiceBox();
     }
 

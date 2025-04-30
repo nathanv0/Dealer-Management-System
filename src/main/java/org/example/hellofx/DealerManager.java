@@ -19,7 +19,7 @@ public class DealerManager {
         return instance;
     }
 
-    public static List<Dealer> loadDealers(String filename) {
+    public List<Dealer> loadDealers(String filename) {
         // If dealers not exist -> create one. Otherwise, return only existing dealers
         if (dealers == null) {
             String extension = getFileExtension(filename);
