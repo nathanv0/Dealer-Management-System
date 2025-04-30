@@ -37,11 +37,6 @@ public class DealerManager {
         return dealers;
     }
 
-    // Get dealers
-    public List<Dealer> getDealers() {
-        return dealers;
-    }
-
     // Check file extension: XML or JSON
     private static String getFileExtension(String filename) {
         int dotIndex = filename.lastIndexOf('.');

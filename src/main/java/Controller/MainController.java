@@ -86,7 +86,6 @@ public class MainController implements Initializable {
         } else {
             loadDealerFile("./src/main/resources/Dealer.xml");
         }
-
     }
 
     // Load the last opened file when application start
