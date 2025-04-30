@@ -1,61 +1,60 @@
-package org.example.groupproject3;
+package org.example.groupproject3
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
+import javafx.application.Application
+import javafx.fxml.FXMLLoader
+import javafx.scene.Scene
+import javafx.scene.control.Alert
+import javafx.scene.control.ButtonType
+import javafx.scene.image.Image
+import javafx.stage.Stage
+import java.io.IOException
 
-import java.io.IOException;
-
-public class DealerApplication extends Application {
-    @Override
-    public void start(Stage stage) throws IOException {
+class DealerApplication : Application() {
+    @Throws(IOException::class)
+    override fun start(stage: Stage) {
         try {
             // Load the fxml file to the root
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
-            Parent root = loader.load();
+            val loader = FXMLLoader(javaClass.getResource("MainPage.fxml"))
+            val root = loader.load<javafx.scene.Parent>()
 
             // Create a Scene by passing the root
-            Scene scene = new Scene(root);
+            val scene = Scene(root)
 
-            stage.setTitle("Dealership Management System"); // Set the title of the stage
+            stage.title = "Dealership Management System" // Set the title of the stage
             // Set the icon of the stage
-            stage.getIcons().add(new Image("icon.jpg"));
+            stage.icons.add(Image("icon.jpg"))
             // Add the scene to the stage
-            stage.setScene(scene);
-            stage.show(); // show the stage
+            stage.scene = scene
+            stage.show() // show the stage
 
-            stage.setOnCloseRequest(windowEvent -> {
-                windowEvent.consume();
-                exitProgram(stage);
-            });
-
-
-        } catch(Exception e) {
-            e.printStackTrace();
-            System.out.println("Can't open the file");
+            stage.setOnCloseRequest { event ->
+                event.consume()
+                exitProgram(stage)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            println("Can't open the file")
         }
     }
 
     // Ask for confirmation when we try to exit the program
-    public void exitProgram(Stage stage) {
+    fun exitProgram(stage: Stage) {
         // Create an alert window to ask for confirmation
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Exit???");
-        alert.setHeaderText("You're about to exit the app!");
-        alert.setContentText("Make sure you save before existing?");
+        val alert = Alert(Alert.AlertType.CONFIRMATION)
+        alert.title = "Exit???"
+        alert.headerText = "You're about to exit the app!"
+        alert.contentText = "Make sure you save before existing?"
 
         if (alert.showAndWait().get() == ButtonType.OK) {
-            System.out.println("You're successfully logout");
-            stage.close();
+            println("You're successfully logout")
+            stage.close()
         }
     }
 
-    public static void main(String[] args) {
-        launch();
+    companion object {
+        @JvmStatic
+        fun main(args: Array<String>) {
+            launch(DealerApplication::class.java)
+        }
     }
 }

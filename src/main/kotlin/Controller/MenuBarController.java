@@ -38,7 +38,7 @@ public class MenuBarController {
         } else {
             System.out.println("File selection cancelled");
         }
-        return "./src/main/resources/Dealer.xml"; // Return default dealer.xml to prevent error
+        return null; // Return null to prevent error
     }
 
     // Method for saving the file
