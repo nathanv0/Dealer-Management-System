@@ -26,7 +26,6 @@ public class MainController implements Initializable {
     @FXML private ChoiceBox<String> dealerChoiceBox;
     // Action buttons
     @FXML private Button updateButton;
-    @FXML private Button addButton;
     @FXML private Button deleteButton;
     @FXML private Button transferButton;
     @FXML private Button rentButton;
@@ -249,28 +248,24 @@ public class MainController implements Initializable {
 
     @FXML
     void handleAddVehicle(ActionEvent event) {
-        handleUpdateVehicle(event);
+        if (currentDealer == null) {
+            showAlertMessage(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer before adding a vehicle");
+        }
+        handleVehicleDialog(new Vehicle(), DialogMode.ADD, "Add new Vehicle");
     }
 
     // Handle update vehicle
     @FXML
     void handleUpdateVehicle(ActionEvent event) {
-        Vehicle vehicle = null;
-        String dialogTitle = "";
-        DialogMode mode;
-
-        if (event.getSource().equals(updateButton)) {
-            mode = DialogMode.UPDATE;
-            dialogTitle = "Update Vehicle";
-            vehicle = (Vehicle) vehicleTable.getSelectionModel().getSelectedItem();
-        } else if (event.getSource().equals(addButton)) {
-            mode = DialogMode.ADD;
-            dialogTitle = "Add Vehicle";
-            vehicle = new Vehicle();
-        }
-        else {
+        Vehicle vehicle = (Vehicle) vehicleTable.getSelectionModel().getSelectedItem();
+        if (vehicle == null) {
             return;
         }
+        handleVehicleDialog(vehicle, DialogMode.UPDATE, "Update Vehicle");
+
+    }
+
+    private void handleVehicleDialog(Vehicle vehicle, DialogMode mode, String dialogTitle) {
         try {
             // Load the fxml file and create a new popup dialog
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -279,7 +274,6 @@ public class MainController implements Initializable {
 
             // Get the vehicle controller
             VehicleDialogController vehicleDialogController = fxmlLoader.getController();
-
             vehicleDialogController.setVehicle(vehicle);
 
             // Create a dialog button type
@@ -291,29 +285,15 @@ public class MainController implements Initializable {
             // When user click OK
             if (clickedButton.get() == ButtonType.OK) {
                 System.out.println("User clicked OK");
-                if (mode == DialogMode.ADD) {
-                    if (currentDealer != null) {
-                        currentDealer.getVehicles().add(vehicle);
-                        vehiclesOL.add(vehicle);
-                    } else {
-                        System.out.println("No dealer selected.");
-                        showAlertMessage(Alert.AlertType.WARNING, "No dealer selected", "Please select dealer before adding new vehicle");
-                    }
-
+                if (mode == DialogMode.ADD && currentDealer != null) {
+                    currentDealer.getVehicles().add(vehicle);
+                    vehiclesOL.add(vehicle);
+                    System.out.println("Vehicle added: " + vehicle);
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void showAlertMessage(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     // Handle when user delete vehicle
@@ -321,16 +301,12 @@ public class MainController implements Initializable {
     void handleDeleteVehicle(ActionEvent event) {
         // Select vehicle from the table
         Vehicle selectedVehicle = (Vehicle) vehicleTable.getSelectionModel().getSelectedItem();
-        if (selectedVehicle != null) {
-            showAlertMessage(Alert.AlertType.CONFIRMATION, "Deleting vehicle", "Are you sure you want to delete selected vehicle?");
-            currentDealer.getVehicles().remove(selectedVehicle);
-            vehiclesOL.remove(selectedVehicle);
-            // Clear the selection
-            vehicleTable.getSelectionModel().clearSelection();
-            System.out.printf("Deleted: %s\n", selectedVehicle);
-        } else {
-            System.out.println("No vehicle selected to delete.");
-        }
+        // Show alert dialog before delete vehicle
+        showAlertMessage(Alert.AlertType.CONFIRMATION, "Deleting vehicle", "Are you sure you want to delete selected vehicle?");
+        currentDealer.getVehicles().remove(selectedVehicle);
+        vehiclesOL.remove(selectedVehicle);
+        vehicleTable.getSelectionModel().clearSelection(); // Clear the selection
+        System.out.printf("Deleted: %s\n", selectedVehicle);
     }
 
     // Handle when user select rent button
@@ -372,58 +348,59 @@ public class MainController implements Initializable {
         }
     }
 
-
     @FXML
     void handleTransferVehicle(ActionEvent event) {
         // Get the selected vehicle
         Vehicle selectedVehicle = (Vehicle) vehicleTable.getSelectionModel().getSelectedItem();
-        if (selectedVehicle != null) {
-            // Create a ChoiceDialog to select the target dealer
-            List<String> dealerNames = new ArrayList<>();
-            for (Dealer dealer : dealers) {
-                dealerNames.add(dealer.getName());
-            }
-
-            ChoiceDialog<String> dealerDialog = new ChoiceDialog<>(dealerNames.get(0), dealerNames);
-            dealerDialog.setTitle("Select Target Dealer");
-            dealerDialog.setHeaderText("Select the dealer to transfer the vehicle to:");
-            dealerDialog.setContentText("Dealer:");
-
-            Optional<String> result = dealerDialog.showAndWait();
-
-            if (result.isPresent()) {
-                String targetDealerName = result.get();
-
-                // Find the target dealer by name
-                Dealer targetDealer = null;
-                for (Dealer dealer : dealers) {
-                    if (dealer.getName().equals(targetDealerName)) {
-                        targetDealer = dealer;
-                        break;
-                    }
-                }
-
-                if (targetDealer == null) {
-                    System.out.println("Target dealer not found.");
-                    return; // Exit if the dealer was not found
-                }
-
-                // Remove the vehicle from the current dealer and add it to the target dealer
-                if (currentDealer != null) {
-                    currentDealer.getVehicles().remove(selectedVehicle);
-                    targetDealer.getVehicles().add(selectedVehicle);
-
-                    // Update the observable list and refresh the table
-                    vehiclesOL.remove(selectedVehicle);
-                    // selector widget
-                    dealerChoiceBox.setValue(targetDealerName);
-
-                    // Inform the user
-                    System.out.println("Vehicle transferred to: " + targetDealer.getName());
-                }
-            }
-        } else {
-            System.out.println("No vehicle selected to transfer.");
+        // Create a ChoiceDialog to select the target dealer
+        List<String> dealerNames = new ArrayList<>();
+        for (Dealer dealer : dealers) {
+            dealerNames.add(dealer.getName());
         }
+
+        ChoiceDialog<String> dealerDialog = new ChoiceDialog<>(dealerNames.get(0), dealerNames);
+        dealerDialog.setTitle("Select Target Dealer");
+        dealerDialog.setHeaderText("Select the dealer to transfer the vehicle to:");
+        dealerDialog.setContentText("Dealer:");
+
+        Optional<String> result = dealerDialog.showAndWait();
+
+        if (result.isPresent()) {
+            String targetDealerName = result.get();
+
+            // Find the target dealer by name
+            Dealer targetDealer = null;
+            for (Dealer dealer : dealers) {
+                if (dealer.getName().equals(targetDealerName)) {
+                    targetDealer = dealer;
+                    break;
+                }
+            }
+            if (targetDealer == null) {
+                System.out.println("Target dealer not found.");
+                return; // Exit if the dealer was not found
+            }
+            // Remove the vehicle from the current dealer and add it to the target dealer
+            if (currentDealer != null) {
+                currentDealer.getVehicles().remove(selectedVehicle);
+                targetDealer.getVehicles().add(selectedVehicle);
+
+                // Update the observable list and refresh the table
+                vehiclesOL.remove(selectedVehicle);
+                // selector widget
+                dealerChoiceBox.setValue(targetDealerName);
+
+                // Inform the user
+                System.out.println("Vehicle transferred to: " + targetDealer.getName());
+            }
+        }
+    }
+
+    private void showAlertMessage(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
