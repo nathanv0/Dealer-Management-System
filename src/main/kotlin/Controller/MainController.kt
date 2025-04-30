@@ -1,11 +1,9 @@
 package Controller
 
 import Controller.VehicleTable.buildTable
-import javafx.beans.binding.Bindings
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import javafx.event.ActionEvent
-import javafx.event.EventHandler
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
@@ -182,7 +180,7 @@ class MainController : Initializable {
     }
 
     @FXML fun handleAbout(event: ActionEvent?) {
-        Alert(Alert.AlertType.INFORMATION).apply {
+        Alert(AlertType.INFORMATION).apply {
             title = "About"
             headerText = "Dealership Management System"
             contentText = "This application allows users to manage vehicle inventory and dealer operations."

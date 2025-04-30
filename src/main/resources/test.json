@@ -1,0 +1,214 @@
+{"Dealers": [
+    {"Dealer": {
+        "name": "Wacky Bob\u2019s Automall",
+        "vehicles": [
+            {
+                "price": "£ 17000",
+                "model": "Range Rover",
+                "id": "848432",
+                "type": "suv",
+                "make": "Land Rover",
+                "status": "Available"
+            },
+            {
+                "price": "$ 22600",
+                "model": "Tundra",
+                "id": "52523",
+                "type": "pickup",
+                "make": "Toyota",
+                "status": "Available"
+            },
+            {
+                "price": "$ 36600",
+                "model": "G70",
+                "id": "151e5dde",
+                "type": "sedan",
+                "make": "Genesis",
+                "status": "Available"
+            },
+            {
+                "price": "$ 22330",
+                "model": "Miata",
+                "id": "ern222",
+                "type": "sports car",
+                "make": "Mazda",
+                "status": "Available"
+            }
+        ],
+        "id": "485"
+    }},
+    {"Dealer": {
+        "name": "Prime Auto Hub",
+        "vehicles": [
+            {
+                "price": "$ 25000",
+                "model": "Explorer",
+                "id": "948392",
+                "type": "suv",
+                "make": "Ford",
+                "status": "Available"
+            },
+            {
+                "price": "$ 31000",
+                "model": "Silverado",
+                "id": "67389",
+                "type": "pickup",
+                "make": "Chevrolet",
+                "status": "Available"
+            },
+            {
+                "price": "$ 27000",
+                "model": "Accord",
+                "id": "1ac5f88",
+                "type": "sedan",
+                "make": "Honda",
+                "status": "Available"
+            },
+            {
+                "price": "£ 17000",
+                "model": "Range Rover",
+                "id": "848432",
+                "type": "suv",
+                "make": "Land Rover",
+                "status": "Available"
+            }
+        ],
+        "id": "902"
+    }},
+    {"Dealer": {
+        "name": "Elite Wheels",
+        "vehicles": [
+            {
+                "price": "$ 35000",
+                "model": "Grand Cherokee",
+                "id": "501327",
+                "type": "suv",
+                "make": "Jeep",
+                "status": "Rented"
+            },
+            {
+                "price": "$ 44000",
+                "model": "1500",
+                "id": "22983",
+                "type": "pickup",
+                "make": "RAM",
+                "status": "Available"
+            },
+            {
+                "price": "$ 19500",
+                "model": "Camry",
+                "id": "7483af",
+                "type": "sedan",
+                "make": "Toyota",
+                "status": "Available"
+            },
+            {
+                "price": "$ 85000",
+                "model": "Portofino",
+                "id": "ferr55",
+                "type": "sports car",
+                "make": "Ferrari",
+                "status": "Available"
+            }
+        ],
+        "id": "784"
+    }},
+    {"Dealer": {
+        "name": "Sunrise Motors",
+        "vehicles": [
+            {
+                "price": "£ 28000",
+                "model": "Santa Fe",
+                "id": "319028",
+                "type": "suv",
+                "make": "Hyundai",
+                "status": "Available"
+            },
+            {
+                "price": "$ 33000",
+                "model": "Titan",
+                "id": "88294",
+                "type": "pickup",
+                "make": "Nissan",
+                "status": "Available"
+            },
+            {
+                "price": "£ 21000",
+                "model": "Forte",
+                "id": "18429ab",
+                "type": "sedan",
+                "make": "Kia",
+                "status": "Available"
+            },
+            {
+                "price": "$ 46000",
+                "model": "Z4",
+                "id": "bz993",
+                "type": "sports car",
+                "make": "BMW",
+                "status": "Available"
+            }
+        ],
+        "id": "665"
+    }},
+    {"Dealer": {
+        "name": "Galaxy Auto Center",
+        "vehicles": [
+            {
+                "price": "$ 32000",
+                "model": "Outback",
+                "id": "900182",
+                "type": "suv",
+                "make": "Subaru",
+                "status": "Rented"
+            },
+            {
+                "price": "£ 37000",
+                "model": "F-150",
+                "id": "109384",
+                "type": "pickup",
+                "make": "Ford",
+                "status": "Available"
+            },
+            {
+                "price": "$ 26000",
+                "model": "Model 3",
+                "id": "aa248f",
+                "type": "sedan",
+                "make": "Tesla",
+                "status": "Available"
+            },
+            {
+                "price": "£ 95000",
+                "model": "Huracán",
+                "id": "lambo9",
+                "type": "sports car",
+                "make": "Lamborghini",
+                "status": "Available"
+            }
+        ],
+        "id": "778"
+    }},
+    {"Dealer": {
+        "name": "Test123",
+        "vehicles": [
+            {
+                "price": "$ 20000",
+                "model": "camry",
+                "id": "12",
+                "type": "suv",
+                "make": "toyota",
+                "status": "Available"
+            },
+            {
+                "price": "$ 62000",
+                "model": "Corvette",
+                "id": "sp1092",
+                "type": "sports car",
+                "make": "Chevrolet",
+                "status": "Available"
+            }
+        ],
+        "id": "123"
+    }}
+]}

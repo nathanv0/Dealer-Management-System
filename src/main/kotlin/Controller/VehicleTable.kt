@@ -16,9 +16,6 @@ object VehicleTable {
         priceCol: TableColumn<Vehicle, String>,
         statusCol: TableColumn<Vehicle, String>
     ) {
-        // Set the perfect space for all the column with no extra space
-        vehicleTable.columnResizePolicy = TableView.CONSTRAINED_RESIZE_POLICY
-
         // Set placeholder message
         val noDataLabel = Label("No vehicles in inventory")
         noDataLabel.style = "-fx-text-fill: gray; -fx-font-size: 16px;"
