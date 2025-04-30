@@ -35,13 +35,13 @@ class DealerDialogController {
     // Validate data if the field is null of empty -> If yes, add cursor focus on that field
     private fun validateData(): Boolean {
         if (idField.text.isNullOrEmpty()) {
-            showAlert(AlertType.ERROR, "Form Error!", "Please enter dealer Id")
+            showAlert("Please enter dealer Id")
             idField.requestFocus()
             return false
         }
 
         if (nameField.text.isNullOrEmpty()) {
-            showAlert(AlertType.ERROR, "Form Error!", "Please enter dealer name")
+            showAlert("Please enter dealer name")
             nameField.requestFocus()
             return false
         }
@@ -49,11 +49,11 @@ class DealerDialogController {
     }
 
     // Show alert dialog
-    private fun showAlert(alertType: Alert.AlertType, title: String, message: String) {
+    private fun showAlert(message: String) {
         // Create alert object
-        val alert = Alert(alertType)
+        val alert = Alert(AlertType.ERROR)
         // Set all attribute and show
-        alert.title = title
+        alert.title = "Form Error!"
         alert.headerText = null
         alert.contentText = message
         alert.showAndWait()

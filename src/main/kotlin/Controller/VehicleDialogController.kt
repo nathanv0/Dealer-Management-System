@@ -47,31 +47,31 @@ class VehicleDialogController {
     // Validate data if the field is empty -> show alert and set the cursor focus on that field
     private fun validateData(): Boolean {
         if (idField.text.isNullOrEmpty()) {
-            showAlert(AlertType.ERROR, "Form Error!", "Please enter vehicle Id")
+            showAlert("Please enter vehicle Id")
             idField.requestFocus()
             return false
         }
 
         if (typeField.text.isNullOrEmpty()) {
-            showAlert(AlertType.ERROR, "Form Error!", "Please enter vehicle type")
+            showAlert("Please enter vehicle type")
             typeField.requestFocus()
             return false
         }
 
         if (makeField.text.isNullOrEmpty()) {
-            showAlert(AlertType.ERROR, "Form Error!", "Please enter vehicle make")
+            showAlert("Please enter vehicle make")
             makeField.requestFocus()
             return false
         }
 
         if (modelField.text.isNullOrEmpty()) {
-            showAlert(AlertType.ERROR, "Form Error!", "Please enter vehicle model")
+            showAlert("Please enter vehicle model")
             modelField.requestFocus()
             return false
         }
 
         if (priceField.text.isNullOrEmpty()) {
-            showAlert(AlertType.ERROR, "Form Error!", "Please enter vehicle price")
+            showAlert("Please enter vehicle price")
             priceField.requestFocus()
             return false
         }
@@ -79,11 +79,11 @@ class VehicleDialogController {
     }
 
     // Show alert dialog
-    fun showAlert(alertType: AlertType, title: String, message: String) {
+    private fun showAlert(message: String) {
         // Create alert object
-        val alert = Alert(alertType)
+        val alert = Alert(AlertType.ERROR)
         // Set all attribute and show
-        alert.title = title
+        alert.title = "Form Error!"
         alert.headerText = null
         alert.contentText = message
         alert.showAndWait()
