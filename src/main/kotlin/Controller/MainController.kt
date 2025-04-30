@@ -369,8 +369,8 @@ class MainController : Initializable {
             vehicleTable.refresh()
             println("Vehicle returned: $selectedVehicle")
         } else {
-            println("This vehicle is not currently rented.")
-            showAlertMessage(AlertType.ERROR, "Error", "This vehicle is not currently rented")
+            println("Vehicle Available. Cannot return to current dealer.")
+            showAlertMessage(AlertType.ERROR, "Error", "Vehicle Available. Cannot return to current dealer.")
         }
     }
 
