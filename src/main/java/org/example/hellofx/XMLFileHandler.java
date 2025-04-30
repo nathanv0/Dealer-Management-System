@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadXMLFile implements FileHandler{
+public class XMLFileHandler implements FileHandler{
     public List<Dealer> getDealers(String fileName) {
         // List to store dealers
         List<Dealer> dealers = new ArrayList<>();
@@ -86,5 +86,85 @@ public class ReadXMLFile implements FileHandler{
         }
         return dealers;
 
+    }
+
+    @Override
+    public void saveDealers(List<Dealer> dealers, String outputPath) {
+        try {
+            // Document Builder Factory
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            // Builder
+            DocumentBuilder builder = factory.newDocumentBuilder();
+
+            // Create new document
+            Document document = builder.newDocument();
+
+            // Root element
+            Element root = document.createElement("Dealers");
+            document.appendChild(root);
+
+            // Loop through each dealer and set the attributes
+            for (Dealer dealer : dealers) {
+                Element dealerElement = document.createElement("Dealer");
+                dealerElement.setAttribute("id", dealer.getId());
+
+                // Dealer name
+                Element nameElement = document.createElement("Name");
+                nameElement.setTextContent(dealer.getName());
+                dealerElement.appendChild(nameElement);
+
+                // Vehicles
+                for (Vehicle vehicle : dealer.getVehicles()) {
+                    Element vehicleElement = document.createElement("Vehicle");
+                    vehicleElement.setAttribute("type", vehicle.getType());
+                    vehicleElement.setAttribute("id", vehicle.getId());
+
+                    // Price element with unit handling
+                    Element priceElement = document.createElement("Price");
+
+                    // Extract unit and price value
+                    String unit = vehicle.getPrice().contains("£") ? "pounds" : "dollars";
+                    String value = vehicle.getPrice().replace("£ ", "").replace("$ ", "");
+
+                    priceElement.setAttribute("unit", unit);
+                    priceElement.setTextContent(value);
+                    vehicleElement.appendChild(priceElement);
+
+                    // Make
+                    Element makeElement = document.createElement("Make");
+                    makeElement.setTextContent(vehicle.getMake());
+                    vehicleElement.appendChild(makeElement);
+
+                    // Model
+                    Element modelElement = document.createElement("Model");
+                    modelElement.setTextContent(vehicle.getModel());
+                    vehicleElement.appendChild(modelElement);
+
+                    // Add vehicle to dealer
+                    dealerElement.appendChild(vehicleElement);
+                }
+
+                // Add dealer to root
+                root.appendChild(dealerElement);
+            }
+
+            // Write to file
+            // Use xml builder library to write to xml file
+            // I actually did used AI to help me with this part because I couldn't figure out how to write it to xml file.
+            javax.xml.transform.TransformerFactory transformerFactory = javax.xml.transform.TransformerFactory.newInstance();
+            javax.xml.transform.Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(javax.xml.transform.OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-space", "4");
+
+            javax.xml.transform.dom.DOMSource source = new javax.xml.transform.dom.DOMSource(document);
+            javax.xml.transform.stream.StreamResult result = new javax.xml.transform.stream.StreamResult(new File(outputPath));
+
+            transformer.transform(source, result);
+
+            System.out.println("Dealers saved to: " + outputPath);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

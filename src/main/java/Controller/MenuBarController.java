@@ -1,14 +1,13 @@
 package Controller;
 
-import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckMenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.example.hellofx.Dealer;
 import org.example.hellofx.JSONFileHandler;
+import org.example.hellofx.XMLFileHandler;
 
 import java.io.File;
 import java.util.List;
@@ -46,15 +45,28 @@ public class MenuBarController {
     public String saveFile( List<Dealer> dealers) {
         FileChooser fileChooser = new FileChooser();
 
+
         fileChooser.getExtensionFilters().addAll(jsonExtension, allFile, xmlExtension);
         fileChooser.setTitle("Save as"); // Set the title of open dialog
         fileChooser.setInitialDirectory(new File("./src/main/resources")); // Set the initial path
         File selectedFile = fileChooser.showSaveDialog(stage);
 
         if (selectedFile != null) {
+            String path = selectedFile.getPath().toLowerCase();
             System.out.println("File selected");
-            System.out.println(selectedFile.getPath());
-            JSONFileHandler.saveAsJson(dealers, selectedFile.getPath());
+
+            // Check if the user save as json or xml file
+            if (path.endsWith(".json")) {
+                JSONFileHandler jsonFileHandler = new JSONFileHandler();
+                jsonFileHandler.saveDealers(dealers, selectedFile.getPath());
+            }
+            else if (path.endsWith(".xml")) {
+                XMLFileHandler xmlFileHandler = new XMLFileHandler();
+                xmlFileHandler.saveDealers(dealers, selectedFile.getPath());
+            } else {
+                System.out.println("Unsupported file format. Please use .json or .xml file.");
+                return null;
+            }
             return selectedFile.getPath(); // Return the saved path
         } else {
             System.out.println("File selection cancelled");

@@ -64,7 +64,8 @@ public class JSONFileHandler implements FileHandler {
         return dealers;
     }
 
-    public static void saveAsJson(List<Dealer> dealers, String outputPath) {
+    // Method for saving dealer as JSON file
+    public void saveDealers(List<Dealer> dealers, String outputPath) {
         // Create JSON array to store all data
         JSONArray dealersArray = new JSONArray();
 

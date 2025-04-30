@@ -21,9 +21,6 @@ public class DealerApplication extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
             Parent root = loader.load();
 
-            // Get the controller instance
-            MainController controller = loader.getController();
-
             // Create a Scene by passing the root
             Scene scene = new Scene(root);
 
@@ -39,12 +36,7 @@ public class DealerApplication extends Application {
                 exitProgram(stage);
             });
 
-            // After the UI is shown, check if the last file exist -> open it
-            String lastFile = PreferencesManager.getLastOpenedFile();
-            if (lastFile != null) {
-                System.out.printf("Loading the last file: " + lastFile);
-                controller.loadLastFile(lastFile);
-            }
+
         } catch(Exception e) {
             e.printStackTrace();
             System.out.println("Can't open the file");

@@ -2,14 +2,24 @@ package org.example.hellofx;
 
 import java.util.List;
 
-public class DealerSingleton {
+public class DealerManager {
+    // Single instance
+    private static DealerManager instance;
+
+    // The list of dealers held by singleton
     private static List<Dealer> dealers;
 
     // Private constructor to prevent instantiation
-    private DealerSingleton() {
+    private DealerManager() {}
+
+    public static synchronized DealerManager getInstance() {
+        if (instance == null) {
+            instance = new DealerManager();
+        }
+        return instance;
     }
 
-    public static List<Dealer> getDealers(String filename) {
+    public static List<Dealer> loadDealers(String filename) {
         // If dealers not exist -> create one. Otherwise, return only existing dealers
         if (dealers == null) {
             String extension = getFileExtension(filename);
@@ -18,7 +28,7 @@ public class DealerSingleton {
                 JSONFileHandler jsonFileHandler = new JSONFileHandler();
                 dealers = jsonFileHandler.getDealers(filename);
             } else if (extension.equals("xml")) {
-                ReadXMLFile readXMLFile = new ReadXMLFile();
+                XMLFileHandler readXMLFile = new XMLFileHandler();
                 dealers = readXMLFile.getDealers(filename);
             } else {
                 System.out.println("This file type is not supported!!!");
@@ -27,8 +37,13 @@ public class DealerSingleton {
         return dealers;
     }
 
+    // Get dealers
+    public List<Dealer> getDealers() {
+        return dealers;
+    }
+
     // Check file extension: XML or JSON
-    public static String getFileExtension(String filename) {
+    private static String getFileExtension(String filename) {
         int dotIndex = filename.lastIndexOf('.');
         if (dotIndex > 0 && dotIndex < filename.length() - 1) {
             return filename.substring(dotIndex + 1).toLowerCase();

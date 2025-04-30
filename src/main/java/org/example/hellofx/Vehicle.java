@@ -11,7 +11,6 @@ public class Vehicle {
     private StringProperty price;
     private String status;
 
-
     // Default constructor
     public Vehicle() {
         this("","", "", "", "");
