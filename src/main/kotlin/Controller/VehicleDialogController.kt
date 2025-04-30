@@ -1,93 +1,91 @@
-package Controller;
+package Controller
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import org.example.groupproject3.Vehicle;
+import javafx.event.ActionEvent
+import javafx.fxml.FXML
+import javafx.scene.control.*
+import javafx.scene.control.Alert.AlertType
+import org.example.groupproject3.Vehicle
 
-
-public class VehicleDialogController {
+class VehicleDialogController {
+    @FXML
+    private lateinit var dialogPane: DialogPane
 
     @FXML
-    private DialogPane dialogPane;
+    private lateinit var idField: TextField
 
     @FXML
-    private TextField idField;
+    private lateinit var makeField: TextField
 
     @FXML
-    private TextField makeField;
+    private lateinit var modelField: TextField
 
     @FXML
-    private TextField modelField;
+    private lateinit var priceField: TextField
 
     @FXML
-    private TextField priceField;
-
-    @FXML
-    private TextField typeField;
+    private lateinit var typeField: TextField
 
     // Called by the Main controller to pass a vehicle object to a dialog
-    public void setVehicle(Vehicle vehicle) {
+    fun setVehicle(vehicle: Vehicle) {
         // Bind the vehicle property to the dialog text field
-        idField.textProperty().bindBidirectional(vehicle.idProperty());
-        typeField.textProperty().bindBidirectional(vehicle.typeProperty());
-        makeField.textProperty().bindBidirectional(vehicle.makeProperty());
-        modelField.textProperty().bindBidirectional(vehicle.modelProperty());
-        priceField.textProperty().bindBidirectional(vehicle.priceProperty());
+        idField.textProperty().bindBidirectional(vehicle.idProperty())
+        typeField.textProperty().bindBidirectional(vehicle.typeProperty())
+        makeField.textProperty().bindBidirectional(vehicle.makeProperty())
+        modelField.textProperty().bindBidirectional(vehicle.modelProperty())
+        priceField.textProperty().bindBidirectional(vehicle.priceProperty())
 
         // Validate
-        Button button = (Button) dialogPane.lookupButton(ButtonType.OK);
-        button.addEventFilter(
-                ActionEvent.ACTION, event -> {
-                    if (!validateData()) {
-                        // Validation failed -> prevent the dialog to close
-                        event.consume();
-                    }
-                });
+        val button = dialogPane.lookupButton(ButtonType.OK) as Button
+        button.addEventFilter( ActionEvent.ACTION ) { event: ActionEvent ->
+            if (!validateData()) {
+                // Validation failed -> prevent the dialog to close
+                event.consume()
+            }
+        }
     }
 
-    private boolean validateData() {
-        if (idField.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Form Error!", "Please enter vehicle Id");
-            idField.requestFocus();
-            return false;
+    // Validate data if the field is empty -> show alert and set the cursor focus on that field
+    private fun validateData(): Boolean {
+        if (idField.text.isNullOrEmpty()) {
+            showAlert(AlertType.ERROR, "Form Error!", "Please enter vehicle Id")
+            idField.requestFocus()
+            return false
         }
 
-        if (typeField.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Form Error!", "Please enter vehicle type");
-            typeField.requestFocus();
-            return false;
+        if (typeField.text.isNullOrEmpty()) {
+            showAlert(AlertType.ERROR, "Form Error!", "Please enter vehicle type")
+            typeField.requestFocus()
+            return false
         }
 
-        if (makeField.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Form Error!", "Please enter vehicle make");
-            makeField.requestFocus();
-            return false;
+        if (makeField.text.isNullOrEmpty()) {
+            showAlert(AlertType.ERROR, "Form Error!", "Please enter vehicle make")
+            makeField.requestFocus()
+            return false
         }
 
-        if (modelField.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Form Error!", "Please enter vehicle model");
-            modelField.requestFocus();
-            return false;
+        if (modelField.text.isNullOrEmpty()) {
+            showAlert(AlertType.ERROR, "Form Error!", "Please enter vehicle model")
+            modelField.requestFocus()
+            return false
         }
 
-        if (priceField.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Form Error!", "Please enter vehicle price");
-            priceField.requestFocus();
-            return false;
+        if (priceField.text.isNullOrEmpty()) {
+            showAlert(AlertType.ERROR, "Form Error!", "Please enter vehicle price")
+            priceField.requestFocus()
+            return false
         }
-        return true;
+        return true
     }
 
     // Show alert dialog
-    public void showAlert(Alert.AlertType alertType, String title, String message) {
+    fun showAlert(alertType: AlertType, title: String, message: String) {
         // Create alert object
-        Alert alert = new Alert(alertType);
+        val alert = Alert(alertType)
         // Set all attribute and show
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+        alert.title = title
+        alert.headerText = null
+        alert.contentText = message
+        alert.showAndWait()
     }
-
 }
