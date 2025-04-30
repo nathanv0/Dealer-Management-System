@@ -22,7 +22,6 @@ public class MainController implements Initializable {
     @FXML private AnchorPane scenePane;
 
     // Menu bar
-    @FXML private MenuItem updateDealerBtn;
     @FXML private Label myLabel;
     @FXML private ChoiceBox<String> dealerChoiceBox;
     // Action buttons
@@ -231,7 +230,7 @@ public class MainController implements Initializable {
                 System.out.println("User clicked OK");
                 if (mode == DialogMode.ADD) {
                     // If the user enter all information and there is no dealer yet
-                    if (dealer != null && dealers != null) {
+                    if (dealers != null) {
                         // Add the new dealer to the list of dealers
                         dealers.add(dealer);
                         System.out.println("New dealer added: " + dealer);

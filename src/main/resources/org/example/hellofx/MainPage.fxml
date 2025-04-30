@@ -37,8 +37,8 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem fx:id="updateDealerBtn" mnemonicParsing="false" onAction="#handleUpdateDealer" text="Update Dealer" />
-                  <MenuItem fx:id="deleteDealerBtn" mnemonicParsing="false" onAction="#handleDeleteDealer" text="Delete Dealer" />
+              <MenuItem mnemonicParsing="false" onAction="#handleUpdateDealer" text="Update Dealer" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleDeleteDealer" text="Delete Dealer" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
