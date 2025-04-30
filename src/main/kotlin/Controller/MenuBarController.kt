@@ -1,92 +1,92 @@
-package Controller;
+package Controller
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import org.example.groupproject3.Dealer;
-import org.example.groupproject3.JSONFileHandler;
-import org.example.groupproject3.XMLFileHandler;
+import javafx.scene.control.Alert
+import javafx.scene.control.ButtonType
+import javafx.scene.layout.AnchorPane
+import javafx.stage.FileChooser
+import javafx.stage.Stage
+import org.example.groupproject3.Dealer
+import org.example.groupproject3.JSONFileHandler
+import org.example.groupproject3.XMLFileHandler
+import java.io.File
+import java.util.*
 
-import java.io.File;
-import java.util.List;
-
-public class MenuBarController {
-    Stage stage;
+class MenuBarController {
+    private var stage: Stage? = null
 
     // Extension filter: filter .xml or .json file
-    FileChooser.ExtensionFilter xmlExtension = new FileChooser.ExtensionFilter("XML Files", "*.xml");
-    FileChooser.ExtensionFilter jsonExtension = new FileChooser.ExtensionFilter("JSON Files", "*.json");
-    FileChooser.ExtensionFilter allFile = new FileChooser.ExtensionFilter("All Files", "*.*");
+    private var xmlExtension = FileChooser.ExtensionFilter("XML Files", "*.xml")
+    private var jsonExtension = FileChooser.ExtensionFilter("JSON Files", "*.json")
+    private var allFile = FileChooser.ExtensionFilter("All Files", "*.*")
 
     // Method for open file
-    public String openFile() {
-        FileChooser fileChooser = new FileChooser();
+    fun openFile(): String? {
+        // Create a lambda to set all attributes for the files
+        val fileChooser = FileChooser().apply {
+            extensionFilters.addAll(xmlExtension, jsonExtension, allFile)
+            title = "Import xml data" // Set the title of open dialog
+            initialDirectory = File("./src/main/resources") // Set the initial path
+        }
 
-        fileChooser.getExtensionFilters().addAll(xmlExtension, jsonExtension, allFile);
-
-        fileChooser.setTitle("Import xml data"); // Set the title of open dialog
-        fileChooser.setInitialDirectory(new File("./src/main/resources")); // Set the initial path
-
-        File selectedFile = fileChooser.showOpenDialog(stage);
+        val selectedFile = fileChooser.showOpenDialog(stage)
 
         if (selectedFile != null) {
-            System.out.println("File selected");
-            System.out.println(selectedFile.getPath());
-            return selectedFile.getPath();
+            println("File selected")
+            println(selectedFile.path)
+            return selectedFile.path
         } else {
-            System.out.println("File selection cancelled");
+            println("File selection cancelled")
         }
-        return null; // Return null to prevent error
+        return null // Return null to prevent error
     }
 
     // Method for saving the file
-    public String saveFile( List<Dealer> dealers) {
-        FileChooser fileChooser = new FileChooser();
+    fun saveFile(dealers: List<Dealer?>): String? {
+        val fileChooser = FileChooser().apply {
+            extensionFilters.addAll(jsonExtension, allFile, xmlExtension)
+            title = "Save as" // Set the title of open dialog
+            initialDirectory = File("./src/main/resources") // Set the initial path
+        }
 
-
-        fileChooser.getExtensionFilters().addAll(jsonExtension, allFile, xmlExtension);
-        fileChooser.setTitle("Save as"); // Set the title of open dialog
-        fileChooser.setInitialDirectory(new File("./src/main/resources")); // Set the initial path
-        File selectedFile = fileChooser.showSaveDialog(stage);
+        val selectedFile = fileChooser.showSaveDialog(stage)
 
         if (selectedFile != null) {
-            String path = selectedFile.getPath().toLowerCase();
-            System.out.println("File selected");
+            val path = selectedFile.path.lowercase(Locale.getDefault())
+            println("File selected")
 
             // Check if the user save as json or xml file
-            if (path.endsWith(".json")) {
-                JSONFileHandler jsonFileHandler = new JSONFileHandler();
-                jsonFileHandler.saveDealers(dealers, selectedFile.getPath());
+            when {
+                path.endsWith(".json") -> {
+                    JSONFileHandler().saveDealers(dealers, selectedFile.path)
+                }
+                path.endsWith(".xml") ->
+                    XMLFileHandler().saveDealers(dealers, selectedFile.path)
+                else -> {
+                    println("Unsupported file format. Please use .json or .xml file.")
+                    return null
+                }
             }
-            else if (path.endsWith(".xml")) {
-                XMLFileHandler xmlFileHandler = new XMLFileHandler();
-                xmlFileHandler.saveDealers(dealers, selectedFile.getPath());
-            } else {
-                System.out.println("Unsupported file format. Please use .json or .xml file.");
-                return null;
-            }
-            return selectedFile.getPath(); // Return the saved path
+            return selectedFile.path // Return the saved path
         } else {
-            System.out.println("File selection cancelled");
+            println("File selection cancelled")
+            return null // Return null if no file selected
         }
-        return null; // Return null if no file selected
     }
 
-
     // Method for exit file
-    public void exit(AnchorPane scenePane) {
+    fun exit(scenePane: AnchorPane) {
         // Create an alert window to ask for confirmation
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Exit???");
-        alert.setHeaderText("You're about to exit the app!");
-        alert.setContentText("Make sure you save before existing?");
+        val alert = Alert(Alert.AlertType.CONFIRMATION).apply{
+            title = "Exit???"
+            headerText = "You're about to exit the app!"
+            contentText = "Make sure you save before existing?"
+
+        }
 
         if (alert.showAndWait().get() == ButtonType.OK) {
-            stage = (Stage) scenePane.getScene().getWindow();
-            System.out.println("You're successfully exit");
-            stage.close();
+            stage = scenePane.scene.window as Stage
+            println("You're successfully exit")
+            stage?.close()
         }
     }
 }

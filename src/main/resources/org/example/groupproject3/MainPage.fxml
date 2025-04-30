@@ -10,7 +10,9 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -43,7 +45,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About" />
             </items>
           </Menu>
         </menus>
@@ -116,6 +118,15 @@
             <Insets left="10.0" />
          </padding>
       </ToolBar>
+      <Label layoutX="14.0" layoutY="281.0" text="🔍 Search:" />
+      <TextField fx:id="searchField" layoutX="76.0" layoutY="277.0" prefHeight="25.0" prefWidth="171.0" promptText="Search by ID, make, model…" />
+      <ChoiceBox fx:id="statusFilterBox" layoutX="779.0" layoutY="277.0" prefHeight="25.0" prefWidth="127.0" />
+      <Label layoutX="735.0" layoutY="279.0" text="Filter:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imageView" fitHeight="157.0" fitWidth="199.0" layoutX="636.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" />
 
          </children>
 </AnchorPane>

@@ -1,35 +1,35 @@
-package Controller;
+package Controller
 
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import org.example.groupproject3.Vehicle;
+import javafx.scene.control.Label
+import javafx.scene.control.TableColumn
+import javafx.scene.control.TableView
+import javafx.scene.control.cell.PropertyValueFactory
+import org.example.groupproject3.Vehicle
 
-
-public class VehicleTable {
-
-    public static void buildTable(TableView<Vehicle> vehicleTable,
-                            TableColumn<Vehicle, String> idCol,
-                            TableColumn<Vehicle, String> typeCol,
-                            TableColumn<Vehicle, String> makeCol,
-                            TableColumn<Vehicle, String> modelCol,
-                            TableColumn<Vehicle, String> priceCol,
-                            TableColumn<Vehicle, String> statusCol) {
+object VehicleTable {
+    fun buildTable(
+        vehicleTable: TableView<Vehicle>,
+        idCol: TableColumn<Vehicle, String>,
+        typeCol: TableColumn<Vehicle, String>,
+        makeCol: TableColumn<Vehicle, String>,
+        modelCol: TableColumn<Vehicle, String>,
+        priceCol: TableColumn<Vehicle, String>,
+        statusCol: TableColumn<Vehicle, String>
+    ) {
         // Set the perfect space for all the column with no extra space
-        vehicleTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        vehicleTable.columnResizePolicy = TableView.CONSTRAINED_RESIZE_POLICY
+
         // Set placeholder message
-        Label noDataLabel = new Label("No vehicles in inventory");
-        noDataLabel.setStyle("-fx-text-fill: gray; -fx-font-size: 16px;");
-        vehicleTable.setPlaceholder(noDataLabel);
+        val noDataLabel = Label("No vehicles in inventory")
+        noDataLabel.style = "-fx-text-fill: gray; -fx-font-size: 16px;"
+        vehicleTable.placeholder = noDataLabel
 
         // Set the column to an associate value
-        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        makeCol.setCellValueFactory(new PropertyValueFactory<>("make"));
-        modelCol.setCellValueFactory(new PropertyValueFactory<>("model"));
-        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-        statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
-
+        idCol.cellValueFactory = PropertyValueFactory("id")
+        typeCol.cellValueFactory = PropertyValueFactory("type")
+        makeCol.cellValueFactory = PropertyValueFactory("make")
+        modelCol.cellValueFactory = PropertyValueFactory("model")
+        priceCol.cellValueFactory = PropertyValueFactory("price")
+        statusCol.cellValueFactory = PropertyValueFactory("status")
     }
 }
